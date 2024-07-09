@@ -1,6 +1,6 @@
 {
   "site": {
-    "title": "Bookworm Light Astro | Blog Template",
+    "title": "PetsBlog | Reviews and Tips for Happy Pets",
     "base_url": "https://bookworm-light-astro.vercel.app",
     "base_path": "/",
     "trailing_slash": false,
@@ -8,7 +8,7 @@
     "logo": "/images/logo.png",
     "logo_width": "200",
     "logo_height": "34",
-    "logo_text": "Bookworm Light"
+    "logo_text": "Pets Blog"
   },
 
   "settings": {
