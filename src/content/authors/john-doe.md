@@ -1,5 +1,5 @@
 ---
-title: John Doe
+title: Sabah Rahal
 image: /images/authors/john-doe.jpg
 description: this is meta description
 social:
