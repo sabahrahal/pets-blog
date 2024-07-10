@@ -16,23 +16,56 @@ export default defineConfig({
   base: config.site.base_path ? config.site.base_path : "/",
   trailingSlash: config.site.trailing_slash ? "always" : "never",
   image: {
-    service: squooshImageService()
+    service: squooshImageService(),
   },
-  integrations: [react(), sitemap(), tailwind({
-    config: {
-      applyBaseStyles: false
-    }
-  }), AutoImport({
-    imports: ["@/shortcodes/Button", "@/shortcodes/Accordion", "@/shortcodes/Notice", "@/shortcodes/Video", "@/shortcodes/Youtube", "@/shortcodes/Tabs", "@/shortcodes/Tab"]
-  }), mdx(), partytown()],
+  integrations: [
+    react(),
+    sitemap(),
+    partytown({
+      config: {
+        resolveUrl: (url, location, type) => {
+          if (url.hostname === "www.google-analytics.com") {
+            const proxyUrl = new URL("https://www.petsblog.in/ga");
+            proxyUrl.searchParams.append("url", url.href);
+            return proxyUrl;
+          }
+          return url;
+        },
+      },
+    }),
+    ,
+    tailwind({
+      config: {
+        applyBaseStyles: false,
+      },
+    }),
+    AutoImport({
+      imports: [
+        "@/shortcodes/Button",
+        "@/shortcodes/Accordion",
+        "@/shortcodes/Notice",
+        "@/shortcodes/Video",
+        "@/shortcodes/Youtube",
+        "@/shortcodes/Tabs",
+        "@/shortcodes/Tab",
+      ],
+    }),
+    mdx(),
+  ],
   markdown: {
-    remarkPlugins: [remarkToc, [remarkCollapse, {
-      test: "Table of contents"
-    }]],
+    remarkPlugins: [
+      remarkToc,
+      [
+        remarkCollapse,
+        {
+          test: "Table of contents",
+        },
+      ],
+    ],
     shikiConfig: {
       theme: "one-dark-pro",
-      wrap: true
+      wrap: true,
     },
-    extendDefaultPlugins: true
-  }
+    extendDefaultPlugins: true,
+  },
 });
