@@ -72,8 +72,11 @@ const { title, description, meta_title, image } = entry.data;
           <form
             class="contact-form row gy-2 justify-center"
             method="POST"
-            action={contact_form_action}
+            id="form"
           >
+
+          <input type="hidden" name="access_key" value="c8386138-ca89-496d-9ed8-9fc059d074ba">
+
             <div class="lg:col-6">
               <label class="mb-2 block" for="name"
                 >Name <span class="text-red-600">*</span></label
@@ -110,8 +113,55 @@ const { title, description, meta_title, image } = entry.data;
               <button class="btn btn-primary mt-2">Submit Now</button>
             </div>
           </form>
+
+          <div id="result"></div>
         </div>
       </div>
     </div>
   </section>
 </Base>
+
+
+<script>
+  const form = document.getElementById('form') as HTMLFormElement;
+  const result = document.getElementById('result');
+  
+  form.addEventListener('submit', function(e) {
+    e.preventDefault();
+    const formData = new FormData(form);
+    const object = Object.fromEntries(formData);
+    const json = JSON.stringify(object);
+
+    if(!result) return
+
+    result.innerHTML = "Please wait..."
+  
+      fetch('https://api.web3forms.com/submit', {
+              method: 'POST',
+              headers: {
+                  'Content-Type': 'application/json',
+                  'Accept': 'application/json'
+              },
+              body: json
+          })
+          .then(async (response) => {
+              let json = await response.json();
+              if (response.status == 200) {
+                  result.innerHTML = "Form submitted successfully";
+              } else {
+                  console.log(response);
+                  result.innerHTML = json.message;
+              }
+          })
+          .catch(error => {
+              console.log(error);
+              result.innerHTML = "Something went wrong!";
+          })
+          .then(function() {
+              form.reset();
+              setTimeout(() => {
+                  result.style.display = "none";
+              }, 3000);
+          });
+  });
+  </script>

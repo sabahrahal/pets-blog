@@ -1,6 +1,7 @@
 ---
 title: "About - Sabah Rahal & Isaias Carreras"
 meta_title: "Pets Blog | About"
+description: "Meet Sabah Rahal and Isaias Carreras, the creators of Pets Blog. Discover our mission to provide top pet care tips and product recommendations for pet lovers."
 image: "/images/author.png"
 draft: false
 
