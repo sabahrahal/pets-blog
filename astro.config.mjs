@@ -40,10 +40,14 @@ export default defineConfig({
     mdx(),
     partytown({
       config: {
-        resolveUrl: (url, location, type) => {
-          if (url.hostname === "www.google-analytics.com") {
-            const proxyUrl = new URL("https://www.petsblog.in/ga");
-            proxyUrl.searchParams.append("url", url.href);
+        resolveUrl: (url) => {
+          if (url.hostname === 'www.googletagmanager.com') {
+            const proxyUrl = new URL('https://www.petsblog.in/proxytown/gtm');
+            proxyUrl.searchParams.append('url', url.href);
+            return proxyUrl;
+          }
+          if (url.hostname === 'www.google-analytics.com') {
+            const proxyUrl = new URL('https://www.petsblog.in/proxytown/ga');
             return proxyUrl;
           }
           return url;
