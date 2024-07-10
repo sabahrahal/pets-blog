@@ -21,19 +21,6 @@ export default defineConfig({
   integrations: [
     react(),
     sitemap(),
-    partytown({
-      config: {
-        resolveUrl: (url, location, type) => {
-          if (url.hostname === "www.google-analytics.com") {
-            const proxyUrl = new URL("https://www.petsblog.in/ga");
-            proxyUrl.searchParams.append("url", url.href);
-            return proxyUrl;
-          }
-          return url;
-        },
-      },
-    }),
-    ,
     tailwind({
       config: {
         applyBaseStyles: false,
@@ -51,6 +38,18 @@ export default defineConfig({
       ],
     }),
     mdx(),
+    partytown({
+      config: {
+        resolveUrl: (url, location, type) => {
+          if (url.hostname === "www.google-analytics.com") {
+            const proxyUrl = new URL("https://www.petsblog.in/ga");
+            proxyUrl.searchParams.append("url", url.href);
+            return proxyUrl;
+          }
+          return url;
+        },
+      },
+    }),
   ],
   markdown: {
     remarkPlugins: [
