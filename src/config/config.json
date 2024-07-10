@@ -1,7 +1,7 @@
 {
   "site": {
     "title": "Pets Blog | Reviews and Tips for Happy Pets",
-    "base_url": "https://bookworm-light-astro.vercel.app",
+    "base_url": "https://www.petsblog.in",
     "base_path": "/",
     "trailing_slash": false,
     "favicon": "/images/favicon.png",
