@@ -1,5 +1,5 @@
 ---
-import { Image } from "astro:assets";
+import { Image, Picture } from "astro:assets";
 import Share from "@/components/Share.astro";
 import SimilarPosts from "@/components/SimilarPosts.astro";
 import { getSinglePage } from "@/lib/contentParser.astro";
@@ -84,8 +84,17 @@ const {
       <div class="col-12 mt-8 mb-2">
         {image && mobileImage && (
           <picture>
-            <source srcset={mobileImage} media="(max-width: 640px)" />
-            <source srcset={image} media="(min-width: 641px)" />
+            <source srcset={mobileImage} media="(max-width: 640px)" type="image/webp"/>
+            <source srcset={image} media="(min-width: 641px)" type="image/webp" />
+            <img
+              src={image}
+              alt={title}
+              class="rounded-lg"
+              width="1000"
+              height="500"
+              loading="lazy"
+              decoding="async"
+            />
           </picture>
         )}
       </div>
