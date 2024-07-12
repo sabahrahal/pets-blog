@@ -24,6 +24,7 @@ const authorsCollection = defineCollection({
     meta_title: z.string().optional(),
     image: z.string().optional(),
     description: z.string().optional(),
+    miniImage: z.string().optional(),
     social: z
       .object({
         facebook: z.string().optional(),

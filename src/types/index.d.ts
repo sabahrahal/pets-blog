@@ -6,6 +6,7 @@ export interface TAuthor {
   data: {
     title: string;
     image: string;
+    miniImage: string; 
     description: string;
     social: {
       facebook: string;
