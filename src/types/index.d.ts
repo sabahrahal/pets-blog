@@ -27,6 +27,7 @@ export interface TPost {
     description: string;
     date: any;
     image: string;
+    mobileImage: string;
     authors: string[];
     categories: string[];
     tags: string[];

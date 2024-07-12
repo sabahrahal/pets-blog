@@ -13,8 +13,16 @@ const posts = await getSinglePage("posts");
 const { post } = Astro.props;
 const similarPosts = similerItems(post, posts, post.slug);
 const { Content } = await post.render();
-const { title, description, authors, categories, image, date, tags } =
-  post.data;
+const {
+  title,
+  description,
+  authors,
+  categories,
+  mobileImage,
+  image,
+  date,
+  tags,
+} = post.data;
 ---
 
 <section class="section">
@@ -29,7 +37,7 @@ const { title, description, authors, categories, image, date, tags } =
                 .filter((author) =>
                   authors
                     .map((author: string) => slugify(author))
-                    .includes(slugify(author.data.title)),
+                    .includes(slugify(author.data.title))
                 )
                 .map((author, i) => (
                   <a
@@ -40,8 +48,8 @@ const { title, description, authors, categories, image, date, tags } =
                       <Image
                         src={author.data.miniImage}
                         alt={`${author.data.title} icon image`}
-                        height={50}
-                        width={50}
+                        height={24}
+                        width={24}
                         class="mr-2 h-6 w-6 rounded-full"
                       />
                     )}
@@ -78,10 +86,22 @@ const { title, description, authors, categories, image, date, tags } =
       </div>
 
       <div class="col-12 mt-8 mb-2">
-        {
+        <!-- {
           image && (
             <Image
               src={image}
+              height={500}
+              width={1000}
+              alt={title}
+              class="rounded-lg"
+            />
+          )
+        } -->
+
+        {
+          mobileImage && (
+            <Image
+              src={mobileImage}
               height={500}
               width={1000}
               alt={title}
