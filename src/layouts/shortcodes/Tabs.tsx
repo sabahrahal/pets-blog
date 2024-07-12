@@ -42,14 +42,16 @@ const Tabs = ({ children }: { children: React.ReactElement }) => {
 
   return (
     <div className="tab">
-      <ul className="tab-nav">
+      <ul className="tab-nav" role="tablist">
         {tabLinks.map(
           (item: { name: string; children: string }, index: number) => (
             <li
               key={index}
-              className={`tab-nav-item ${index === active && "active"}`}
+              className={`tab-nav-item ${index === active ? "active" : ""}`}
               role="tab"
               tabIndex={index === active ? 0 : -1}
+              id={`tab-${index}`}
+              aria-controls={`tabpanel-${index}`}
               onKeyDown={(event) => handleKeyDown(event, index)}
               onClick={() => setActive(index)}
               //@ts-ignore
@@ -64,6 +66,9 @@ const Tabs = ({ children }: { children: React.ReactElement }) => {
         <div
           className={active === i ? "tab-content block px-5" : "hidden"}
           key={i}
+          id={`tabpanel-${i}`}
+          role="tabpanel"
+          aria-labelledby={`tab-${i}`}
           dangerouslySetInnerHTML={{
             __html: marked.parse(item.children),
           }}

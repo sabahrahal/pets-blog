@@ -46,7 +46,7 @@ const { className, posts, fluid } = Astro.props;
                   {author.data.image && (
                     <Image
                       src={author.data.image}
-                      alt={author.data.title}
+                      alt={`${author.data.title} icon image`}
                       height={50}
                       width={50}
                       class="mr-2 h-6 w-6 rounded-full"

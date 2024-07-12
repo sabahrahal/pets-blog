@@ -1,6 +1,6 @@
 ---
 title: Isaias Carreras
-image: /images/authors/mark-dinn.jpg
+image: /images/authors/mark-dinn.webp
 description: this is meta description
 social:
   facebook: https://www.facebook.com/

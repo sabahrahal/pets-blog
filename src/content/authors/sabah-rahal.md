@@ -1,6 +1,6 @@
 ---
 title: Sabah Rahal
-image: /images/authors/john-doe.jpg
+image: /images/authors/john-doe.webp
 description: this is meta description
 social:
   github: https://github.com/sabahrahal
