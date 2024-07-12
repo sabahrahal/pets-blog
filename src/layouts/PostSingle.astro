@@ -32,31 +32,29 @@ const {
         <h1 set:html={markdownify(title)} class="h2" />
         <ul class="mt-4 flex flex-wrap items-center justify-center text-text">
           <li class="mx-3">
-            {
-              allAuthors
-                .filter((author) =>
-                  authors
-                    .map((author: string) => slugify(author))
-                    .includes(slugify(author.data.title))
-                )
-                .map((author, i) => (
-                  <a
-                    href={`/authors/${slugify(author.slug)}`}
-                    class="flex items-center hover:text-primary font-medium"
-                  >
-                    {author.data.miniImage && (
-                      <Image
-                        src={author.data.miniImage}
-                        alt={`${author.data.title} icon image`}
-                        height={24}
-                        width={24}
-                        class="mr-2 h-6 w-6 rounded-full"
-                      />
-                    )}
-                    <span>{author.data.title}</span>
-                  </a>
-                ))
-            }
+            {allAuthors
+              .filter((author) =>
+                authors
+                  .map((author: string) => slugify(author))
+                  .includes(slugify(author.data.title))
+              )
+              .map((author, i) => (
+                <a
+                  href={`/authors/${slugify(author.slug)}`}
+                  class="flex items-center hover:text-primary font-medium"
+                >
+                  {author.data.miniImage && (
+                    <Image
+                      src={author.data.miniImage}
+                      alt={`${author.data.title} icon image`}
+                      height={24}
+                      width={24}
+                      class="mr-2 h-6 w-6 rounded-full"
+                    />
+                  )}
+                  <span>{author.data.title}</span>
+                </a>
+              ))}
           </li>
           <li class="mx-3 flex items-center flex-wrap font-medium">
             <BiCalendarEdit className="mr-1 h-5 w-5 text-gray-600" />
@@ -66,19 +64,17 @@ const {
             <BiCategoryAlt className="mr-1 h-[18px] w-[18px] text-gray-600" />
             <>
               <ul>
-                {
-                  categories.map((category: string, i: number) => (
-                    <li class="inline-block">
-                      <a
-                        href={`/categories/${slugify(category)}`}
-                        class="mr-2 hover:text-primary font-medium"
-                      >
-                        {humanize(category)}
-                        {i !== post.data.categories.length - 1 && ","}
-                      </a>
-                    </li>
-                  ))
-                }
+                {categories.map((category: string, i: number) => (
+                  <li class="inline-block">
+                    <a
+                      href={`/categories/${slugify(category)}`}
+                      class="mr-2 hover:text-primary font-medium"
+                    >
+                      {humanize(category)}
+                      {i !== post.data.categories.length - 1 && ","}
+                    </a>
+                  </li>
+                ))}
               </ul>
             </>
           </li>
@@ -86,29 +82,12 @@ const {
       </div>
 
       <div class="col-12 mt-8 mb-2">
-        <!-- {
-          image && (
-            <Image
-              src={image}
-              height={500}
-              width={1000}
-              alt={title}
-              class="rounded-lg"
-            />
-          )
-        } -->
-
-        {
-          mobileImage && (
-            <Image
-              src={mobileImage}
-              height={500}
-              width={1000}
-              alt={title}
-              class="rounded-lg"
-            />
-          )
-        }
+        {image && mobileImage && (
+          <picture>
+            <source srcset={mobileImage} media="(max-width: 640px)" />
+            <source srcset={image} media="(min-width: 641px)" />
+          </picture>
+        )}
       </div>
 
       <div class="md:col-10">
@@ -117,18 +96,16 @@ const {
         </div>
         <div class="flex flex-wrap items-center justify-between">
           <ul class="mr-4 mb-4 space-x-3">
-            {
-              tags.map((tag: string) => (
-                <li class="inline-block">
-                  <a
-                    href={`/tags/${slugify(tag)}`}
-                    class="block rounded-lg bg-theme-light px-4 py-2 font-semibold text-dark text-sm hover:text-primary transition duration-300"
-                  >
-                    #{humanize(tag)}
-                  </a>
-                </li>
-              ))
-            }
+            {tags.map((tag: string) => (
+              <li class="inline-block">
+                <a
+                  href={`/tags/${slugify(tag)}`}
+                  class="block rounded-lg bg-theme-light px-4 py-2 font-semibold text-dark text-sm hover:text-primary transition duration-300"
+                >
+                  #{humanize(tag)}
+                </a>
+              </li>
+            ))}
           </ul>
           <Share
             className="social-share mb-4"
@@ -143,13 +120,11 @@ const {
 </section>
 
 <!-- similar posts -->
-{
-  similarPosts.length > 0 && (
-    <section class="section pt-0">
-      <div class="container">
-        <h2 class="mb-8 text-center h3">Similar Posts</h2>
-        <SimilarPosts posts={similarPosts.slice(0, 3)} />
-      </div>
-    </section>
-  )
-}
+{similarPosts.length > 0 && (
+  <section class="section pt-0">
+    <div class="container">
+      <h2 class="mb-8 text-center h3">Similar Posts</h2>
+      <SimilarPosts posts={similarPosts.slice(0, 3)} />
+    </div>
+  </section>
+)}
