@@ -1,5 +1,6 @@
 ---
 import { Image, Picture } from "astro:assets";
+import OptimizedImage from "@/layouts/components/OptimizedImage/OptimizedImage.astro";
 import Share from "@/components/Share.astro";
 import SimilarPosts from "@/components/SimilarPosts.astro";
 import { getSinglePage } from "@/lib/contentParser.astro";
@@ -83,27 +84,14 @@ const {
 
       <div class="col-12 mt-8 mb-2">
         {image && (
-          <picture>
-            {mobileImage && (
-              <source 
-                srcset={mobileImage} 
-                media="(max-width: 640px)" 
-              />
-            )}
-            <source 
-              srcset={image} 
-              media="(min-width: 641px)" 
-            />
-            <img
-              src={mobileImage || image}
-              alt={title}
-              class="rounded-lg w-full"
-              width={mobileImage ? "640" : "1000"}
-              height={mobileImage ? "360" : "500"}
-              loading="eager"
-              decoding="async"
-            />
-          </picture>
+          <OptimizedImage
+            src={image}
+            mobileSrc={mobileImage}
+            alt={title}
+            width={1000}
+            height={500}
+            priority={true}
+          />
         )}
       </div>
 

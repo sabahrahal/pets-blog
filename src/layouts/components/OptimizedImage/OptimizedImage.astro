@@ -1,0 +1,55 @@
+---
+interface Props {
+  src: string;            
+  mobileSrc?: string;       
+  alt: string;              
+  width?: number | string;  
+  height?: number | string; 
+  class?: string;           
+  priority?: boolean;       
+}
+
+const { 
+  src, 
+  mobileSrc, 
+  alt, 
+  width = "auto", 
+  height = "auto", 
+  class: className = "",
+  priority = false 
+} = Astro.props;
+
+const imageClass = `rounded-lg w-full ${className}`;
+
+const mobileWidth = typeof width === 'number' ? Math.min(width, 640) : "640";
+const mobileHeight = typeof height === 'number' && typeof width === 'number' 
+  ? Math.round((640 * Number(height)) / Number(width))
+  : "auto";
+---
+
+{priority && (
+  <link rel="preload" href={mobileSrc || src} as="image" />
+)}
+
+<picture>
+  {mobileSrc && (
+    <source 
+      srcset={mobileSrc} 
+      media="(max-width: 640px)" 
+    />
+  )}
+  <source 
+    srcset={src} 
+    media="(min-width: 641px)" 
+  />
+  <img
+    src={mobileSrc || src}
+    alt={alt}
+    class={imageClass}
+    width={mobileSrc ? mobileWidth : width}
+    height={mobileSrc ? mobileHeight : height}
+    loading={priority ? "eager" : "lazy"}
+    decoding="async"
+    fetchpriority={priority ? "high" : "auto"}
+  />
+</picture>
