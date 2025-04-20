@@ -38,7 +38,14 @@ export default defineConfig({
       ],
     }),
     mdx(),
-    partytown(),
+    partytown({
+      // Configuración específica para Google Analytics
+      config: {
+        forward: ["dataLayer.push", "gtag"],
+        lib: "/~partytown/",  // Ruta estándar a los archivos de Partytown
+        debug: true           // Activar para debugging y luego cambiar a false en producción
+      }
+    }),
   ],
   markdown: {
     remarkPlugins: [

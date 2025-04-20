@@ -1,9 +1,61 @@
-<!-- Google tag (gtag.js) -->
-<script type="text/javascript" async src="https://www.googletagmanager.com/gtag/js?id=G-E9YELP7F0X"></script>
-<script type="text/javascript">
-  window.dataLayer = window.dataLayer || [];
-  function gtag(){dataLayer.push(arguments);}
-  gtag('js', new Date());
+---
+// Usando tu ID existente de Google Analytics
+const GA_ID = "G-E9YELP7F0X"; // ID confirmado
+const isDev = import.meta.env.DEV;
+---
 
-  gtag('config', 'G-E9YELP7F0X');
-</script>
+{!isDev ? (
+  <>
+    <!-- Google Analytics Script con optimización Partytown (solo en producción) -->
+    <script type="text/partytown" define:vars={{ GA_ID }}>
+      // Analytics initialization code
+      window.dataLayer = window.dataLayer || [];
+      function gtag() {
+        dataLayer.push(arguments);
+      }
+      gtag("js", new Date());
+      gtag("config", GA_ID, { 
+        send_page_view: false,
+        anonymize_ip: true
+      });
+
+      // Registro de la vista de página inicial
+      gtag("event", "page_view", {
+        page_title: document.title,
+        page_location: window.location.href,
+        page_path: window.location.pathname
+      });
+
+      // Listener para transiciones de página en Astro
+      document.addEventListener("astro:page-load", () => {
+        gtag("event", "page_view", {
+          page_title: document.title,
+          page_location: window.location.href,
+          page_path: window.location.pathname
+        });
+      });
+    </script>
+
+    <!-- Google Analytics Tag (con Partytown) -->
+    <script type="text/partytown" src={`https://www.googletagmanager.com/gtag/js?id=${GA_ID}`}></script>
+  </>
+) : (
+  <>
+    <!-- Google Analytics version directa para desarrollo/depuración -->
+    <script is:inline define:vars={{ GA_ID }}>
+      console.log("Google Analytics (Modo Desarrollo)", GA_ID);
+      // Simulando funciones de GA para pruebas
+      window.dataLayer = window.dataLayer || [];
+      function gtag() {
+        console.log("GA call:", arguments);
+        dataLayer.push(arguments);
+      }
+      gtag("js", new Date());
+      gtag("config", GA_ID);
+      // Registrar eventos para debug
+      document.addEventListener("astro:page-load", () => {
+        console.log("Development GA: Page view registered");
+      });
+    </script>
+  </>
+)}
