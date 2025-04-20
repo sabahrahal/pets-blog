@@ -82,16 +82,24 @@ const {
       </div>
 
       <div class="col-12 mt-8 mb-2">
-        {image && mobileImage && (
+        {image && (
           <picture>
-            <source srcset={mobileImage} media="(max-width: 640px)" type="image/webp"/>
-            <source srcset={image} media="(min-width: 641px)" type="image/webp" />
+            {mobileImage && (
+              <source 
+                srcset={mobileImage} 
+                media="(max-width: 640px)" 
+              />
+            )}
+            <source 
+              srcset={image} 
+              media="(min-width: 641px)" 
+            />
             <img
-              src={image}
+              src={mobileImage || image}
               alt={title}
-              class="rounded-lg"
-              width="1000"
-              height="500"
+              class="rounded-lg w-full"
+              width={mobileImage ? "640" : "1000"}
+              height={mobileImage ? "360" : "500"}
               loading="eager"
               decoding="async"
             />
