@@ -3,6 +3,7 @@ title: "Banana is the best meal packages in the UK spark outrage online"
 description: "meta description"
 date: 2022-04-05T16:56:47+06:00
 image: "/images/posts/05.jpg"
+mobileImage: "/images/posts/05-m.webp"
 draft: false
 authors: ["John Doe"]
 tags: ["Food", "Gold"]

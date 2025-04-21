@@ -3,6 +3,7 @@ title: What you need to know about Photography
 description: "meta description"
 date: 2022-04-03T06:00:00+00:00
 image: "/images/posts/03.jpg"
+mobileImage: "/images/posts/03-m.webp"
 categories: ["art"]
 authors: ["Mark Dinn"]
 tags: ["diy", "toy"]

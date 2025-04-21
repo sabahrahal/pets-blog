@@ -3,6 +3,7 @@ title: "Become a morning person with the help of alarm clock"
 description: "meta description"
 date: 2022-04-06T16:56:47+06:00
 image: "/images/posts/06.jpg"
+mobileImage: "/images/posts/06-m.webp"
 draft: false
 authors: ["Mark Dinn"]
 tags: ["Alarm", "Clock"]
